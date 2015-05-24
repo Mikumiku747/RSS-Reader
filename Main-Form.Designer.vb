@@ -24,7 +24,11 @@ Partial Class Main_Form
     Private Sub InitializeComponent()
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FeedsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ManageFeedsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ArticlesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NewestArticleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OldestArticleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReaderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OlderArticleButton = New System.Windows.Forms.Button()
         Me.NewerArticleButton = New System.Windows.Forms.Button()
@@ -35,10 +39,7 @@ Partial Class Main_Form
         Me.FeedTitleLabel = New System.Windows.Forms.LinkLabel()
         Me.FeedDescriptionLabel = New System.Windows.Forms.Label()
         Me.ArticleTitleLabel = New System.Windows.Forms.LinkLabel()
-        Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ManageFeedsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NewestArticleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OldestArticleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ManageFeedsButton = New System.Windows.Forms.Button()
         Me.MenuStrip.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -59,12 +60,36 @@ Partial Class Main_Form
         Me.FeedsToolStripMenuItem.Size = New System.Drawing.Size(49, 20)
         Me.FeedsToolStripMenuItem.Text = "Feeds"
         '
+        'RefreshToolStripMenuItem
+        '
+        Me.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem"
+        Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.RefreshToolStripMenuItem.Text = "Refresh"
+        '
+        'ManageFeedsToolStripMenuItem
+        '
+        Me.ManageFeedsToolStripMenuItem.Name = "ManageFeedsToolStripMenuItem"
+        Me.ManageFeedsToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.ManageFeedsToolStripMenuItem.Text = "Manage Feeds..."
+        '
         'ArticlesToolStripMenuItem
         '
         Me.ArticlesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewestArticleToolStripMenuItem, Me.OldestArticleToolStripMenuItem})
         Me.ArticlesToolStripMenuItem.Name = "ArticlesToolStripMenuItem"
         Me.ArticlesToolStripMenuItem.Size = New System.Drawing.Size(58, 20)
         Me.ArticlesToolStripMenuItem.Text = "Articles"
+        '
+        'NewestArticleToolStripMenuItem
+        '
+        Me.NewestArticleToolStripMenuItem.Name = "NewestArticleToolStripMenuItem"
+        Me.NewestArticleToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.NewestArticleToolStripMenuItem.Text = "Newest Article"
+        '
+        'OldestArticleToolStripMenuItem
+        '
+        Me.OldestArticleToolStripMenuItem.Name = "OldestArticleToolStripMenuItem"
+        Me.OldestArticleToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.OldestArticleToolStripMenuItem.Text = "Oldest Article"
         '
         'ReaderToolStripMenuItem
         '
@@ -102,11 +127,11 @@ Partial Class Main_Form
         '
         'FeedSelectorBox
         '
-        Me.TableLayoutPanel1.SetColumnSpan(Me.FeedSelectorBox, 3)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.FeedSelectorBox, 2)
         Me.FeedSelectorBox.FormattingEnabled = True
         Me.FeedSelectorBox.Location = New System.Drawing.Point(18, 18)
         Me.FeedSelectorBox.Name = "FeedSelectorBox"
-        Me.FeedSelectorBox.Size = New System.Drawing.Size(348, 21)
+        Me.FeedSelectorBox.Size = New System.Drawing.Size(273, 21)
         Me.FeedSelectorBox.TabIndex = 4
         Me.FeedSelectorBox.Text = "Select an RSS feed..."
         '
@@ -137,6 +162,7 @@ Partial Class Main_Form
         Me.TableLayoutPanel1.Controls.Add(Me.FeedTitleLabel, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.FeedDescriptionLabel, 1, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.ArticleTitleLabel, 1, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.ManageFeedsButton, 3, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 24)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -191,29 +217,15 @@ Partial Class Main_Form
         Me.ArticleTitleLabel.TabStop = True
         Me.ArticleTitleLabel.Text = "Article Title"
         '
-        'RefreshToolStripMenuItem
+        'ManageFeedsButton
         '
-        Me.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem"
-        Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.RefreshToolStripMenuItem.Text = "Refresh"
-        '
-        'ManageFeedsToolStripMenuItem
-        '
-        Me.ManageFeedsToolStripMenuItem.Name = "ManageFeedsToolStripMenuItem"
-        Me.ManageFeedsToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
-        Me.ManageFeedsToolStripMenuItem.Text = "Manage Feeds..."
-        '
-        'NewestArticleToolStripMenuItem
-        '
-        Me.NewestArticleToolStripMenuItem.Name = "NewestArticleToolStripMenuItem"
-        Me.NewestArticleToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.NewestArticleToolStripMenuItem.Text = "Newest Article"
-        '
-        'OldestArticleToolStripMenuItem
-        '
-        Me.OldestArticleToolStripMenuItem.Name = "OldestArticleToolStripMenuItem"
-        Me.OldestArticleToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.OldestArticleToolStripMenuItem.Text = "Oldest Article"
+        Me.ManageFeedsButton.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ManageFeedsButton.Location = New System.Drawing.Point(297, 18)
+        Me.ManageFeedsButton.Name = "ManageFeedsButton"
+        Me.ManageFeedsButton.Size = New System.Drawing.Size(69, 22)
+        Me.ManageFeedsButton.TabIndex = 9
+        Me.ManageFeedsButton.Text = "Feeds"
+        Me.ManageFeedsButton.UseVisualStyleBackColor = True
         '
         'Main_Form
         '
@@ -253,4 +265,5 @@ Partial Class Main_Form
     Friend WithEvents ManageFeedsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NewestArticleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OldestArticleToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ManageFeedsButton As Button
 End Class

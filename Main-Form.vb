@@ -2,27 +2,37 @@
 
 Public Class Main_Form
 
-    Public feedurl As String = "http://xkcd.com/rss.xml"
+    Public feedurl As String = My.Settings.Feeds(0).ToString
     Public articleno As Integer = 0
 
     Dim noOfArticles As Integer = 1
     Dim feedlink As String = ""
     Dim articlelink As String = ""
 
+    Dim noRun As Boolean = False
+
     Private Sub Main_Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        loadarticle(feedurl, articleno)
+        FeedSelectorBox.DataSource = My.Settings.Feeds
     End Sub
 
     Private Sub FeedSelectorBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles FeedSelectorBox.SelectedIndexChanged
-
+        feedurl = FeedSelectorBox.Items(FeedSelectorBox.SelectedIndex)
+        loadarticle(feedurl, articleno)
     End Sub
 
     Private Sub loadarticle(feedurl, articleno)
         Dim feed As New XmlDocument
         Try
             feed.Load(feedurl)
-        Catch ex As System.Net.WebException
-            MsgBox("Could not connect to feed.")
+        Catch ex As Exception
+            MsgBox("An error occured: " & ex.Message, MsgBoxStyle.Critical, "Error loading rss feed")
+            FeedTitleLabel.Text = "Error loading feed"
+            feedlink = ""
+            FeedDescriptionLabel.Text = ""
+            ArticleTitleLabel.Text = ""
+            articlelink = ""
+            ArticleViewerWebBrowser.DocumentText = "<p>An error occured while loading the feed:</p><p>" & ex.Message & "</p><p>Please check your connection and the feed URL and try again."
+            PublishDateLabel.Text = ""
             Return
         End Try
         Dim title As String = "Failed to load feed title"
@@ -76,7 +86,7 @@ Public Class Main_Form
             articleno = articleno - 1
             loadarticle(feedurl, articleno)
         Else
-            MsgBox("No newer articles To view.")
+            MsgBox("No newer articles to view.")
         End If
     End Sub
 
@@ -90,5 +100,12 @@ Public Class Main_Form
         If articlelink <> "" Then
             Process.Start(articlelink)
         End If
+    End Sub
+
+    Private Sub ManageFeedsButton_Click(sender As Object, e As EventArgs) Handles ManageFeedsButton.Click
+        Dim feedmanager As New FeedManager
+        feedmanager.ShowDialog()
+        feedurl = My.Settings.Feeds(0)
+        FeedSelectorBox.DataSource = My.Settings.Feeds
     End Sub
 End Class
