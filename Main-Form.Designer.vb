@@ -82,13 +82,13 @@ Partial Class Main_Form
         'NewestArticleToolStripMenuItem
         '
         Me.NewestArticleToolStripMenuItem.Name = "NewestArticleToolStripMenuItem"
-        Me.NewestArticleToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.NewestArticleToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.NewestArticleToolStripMenuItem.Text = "Newest Article"
         '
         'OldestArticleToolStripMenuItem
         '
         Me.OldestArticleToolStripMenuItem.Name = "OldestArticleToolStripMenuItem"
-        Me.OldestArticleToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.OldestArticleToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OldestArticleToolStripMenuItem.Text = "Oldest Article"
         '
         'ReaderToolStripMenuItem
@@ -96,6 +96,7 @@ Partial Class Main_Form
         Me.ReaderToolStripMenuItem.Name = "ReaderToolStripMenuItem"
         Me.ReaderToolStripMenuItem.Size = New System.Drawing.Size(55, 20)
         Me.ReaderToolStripMenuItem.Text = "Reader"
+        Me.ReaderToolStripMenuItem.Visible = False
         '
         'OlderArticleButton
         '

@@ -21,7 +21,9 @@ Public Class Main_Form
     End Sub
 
     Private Sub loadarticle(feedurl, articleno)
+        Cursor = Cursors.WaitCursor 'Set a cursor so the user know we're loading
         Dim feed As New XmlDocument
+
         Try
             feed.Load(feedurl)
         Catch ex As Exception
@@ -70,6 +72,7 @@ Public Class Main_Form
         ArticleViewerWebBrowser.DocumentText = a_desc
         PublishDateLabel.Text = a_pubdate
         Debug.Print(ArticleViewerWebBrowser.DocumentText)
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub OlderArticleButton_Click(sender As Object, e As EventArgs) Handles OlderArticleButton.Click
@@ -107,5 +110,23 @@ Public Class Main_Form
         feedmanager.ShowDialog()
         feedurl = My.Settings.Feeds(0)
         FeedSelectorBox.DataSource = My.Settings.Feeds
+    End Sub
+
+    Private Sub RefreshToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RefreshToolStripMenuItem.Click
+        loadarticle(feedurl, articleno)
+    End Sub
+
+    Private Sub ManageFeedsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManageFeedsToolStripMenuItem.Click
+        ManageFeedsButton_Click(sender, e)
+    End Sub
+
+    Private Sub NewestArticleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewestArticleToolStripMenuItem.Click
+        articleno = 0
+        loadarticle(feedurl, articleno)
+    End Sub
+
+    Private Sub OldestArticleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OldestArticleToolStripMenuItem.Click
+        articleno = noOfArticles - 1
+        loadarticle(feedurl, articleno)
     End Sub
 End Class
